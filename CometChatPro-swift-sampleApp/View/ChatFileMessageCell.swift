@@ -20,6 +20,7 @@ class ChatFileMessageCell: UITableViewCell {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var timeLabel1: UILabel!
+    @IBOutlet weak var readReceipts: UIImageView!
     
     // NSLayoutConstraints Declarations
     @IBOutlet weak var fileMessageViewTrailingConstrant: NSLayoutConstraint!
@@ -138,14 +139,21 @@ class ChatFileMessageCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
         
         if(isSelf == true){
+            timeLabel1.isHidden = false
+            readReceipts.isHidden = false
             userNameLabel.isHidden = true
             timeLabel.isHidden = true
             timeLabelWidthConstraint.constant = 0
             timeLabelTrailingConstraints.constant = 10
-            fileMessageViewTrailingConstrant.constant = 0
+            fileMessageViewTrailingConstrant.constant = 10
             //fileMessageView.widthConstraint?.constant = 230
             fileMessageViewLeadingConstraint.constant = 65
             //timeLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0)
+        }else{
+            timeLabel1.isHidden = false
+            readReceipts.isHidden = true
+            userNameLabel.isHidden = false
+            timeLabel.isHidden = false
         }
         
         

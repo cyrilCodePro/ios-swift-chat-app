@@ -277,7 +277,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        
+        userProfileTableView.deselectRow(at: indexPath, animated: true)
         switch profileItems[indexPath.row]
         {
         case UserProfileCell.VIEW_MEMBER_CELL:

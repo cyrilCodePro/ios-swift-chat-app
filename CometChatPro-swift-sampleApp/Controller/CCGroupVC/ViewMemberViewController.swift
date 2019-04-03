@@ -95,6 +95,8 @@ class ViewMemberViewController: UIViewController,UITableViewDelegate,UITableView
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        viewMemberTableView.deselectRow(at: indexPath, animated: true)
+        
         let groupMember:GroupMember = self.members[indexPath.row]
         
         let selectedCell:ViewMemberTableViewCell = tableView.cellForRow(at: indexPath) as! ViewMemberTableViewCell

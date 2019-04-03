@@ -776,17 +776,12 @@ class OneOnOneChatViewController: UIViewController,UITextViewDelegate,UITableVie
             
         case .image:
             
-            let imageMessage = (messageData as? MediaMessage)
-            let url = NSURL.fileURL(withPath:imageMessage!.url!.decodeUrl()!)
-            previewURL = imageMessage!.url!.decodeUrl()!
-            let fileExtention = url.pathExtension
-            let pathPrefix = url.lastPathComponent
-            let fileName = URL(fileURLWithPath: pathPrefix).deletingPathExtension().lastPathComponent
-            let DocumentDirURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-            fileURL = DocumentDirURL.appendingPathComponent(fileName).appendingPathExtension(fileExtention)
-            previewQL.reloadData()
-            previewQL.currentPreviewItemIndex = indexPath.row
-            show(previewQL, sender: nil)
+            let imageCell:ChatImageMessageCell = tableView.cellForRow(at: indexPath) as! ChatImageMessageCell
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let profileAvtarViewController = storyboard.instantiateViewController(withIdentifier: "ccprofileAvtarViewController") as! CCprofileAvtarViewController
+            navigationController?.pushViewController(profileAvtarViewController, animated: true)
+            profileAvtarViewController.profileAvtar =  imageCell.chatImage.image
+            profileAvtarViewController.hidesBottomBarWhenPushed = true
             
         case .video:
             
@@ -800,6 +795,7 @@ class OneOnOneChatViewController: UIViewController,UITextViewDelegate,UITableVie
             }
         case .audio:
             
+          
             let audioMessage = (messageData as? MediaMessage)
             let url = NSURL.fileURL(withPath:audioMessage!.url!.decodeUrl()!)
             previewURL = audioMessage!.url!.decodeUrl()!
@@ -808,12 +804,13 @@ class OneOnOneChatViewController: UIViewController,UITextViewDelegate,UITableVie
             let fileName = URL(fileURLWithPath: pathPrefix).deletingPathExtension().lastPathComponent
             let DocumentDirURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
             fileURL = DocumentDirURL.appendingPathComponent(fileName).appendingPathExtension(fileExtention)
-            previewQL.reloadData()
+            previewQL.refreshCurrentPreviewItem()
             previewQL.currentPreviewItemIndex = indexPath.row
             show(previewQL, sender: nil)
             
-        case .file:
             
+        case .file:
+           
             let fileMessage = (messageData as? MediaMessage)
             let url = NSURL.fileURL(withPath:fileMessage!.url!.decodeUrl()!)
             previewURL = fileMessage!.url!.decodeUrl()!
@@ -822,7 +819,7 @@ class OneOnOneChatViewController: UIViewController,UITextViewDelegate,UITableVie
             let fileName = URL(fileURLWithPath: pathPrefix).deletingPathExtension().lastPathComponent
             let DocumentDirURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
             fileURL = DocumentDirURL.appendingPathComponent(fileName).appendingPathExtension(fileExtention)
-            previewQL.reloadData()
+            previewQL.refreshCurrentPreviewItem()
             previewQL.currentPreviewItemIndex = indexPath.row
             show(previewQL, sender: nil)
             

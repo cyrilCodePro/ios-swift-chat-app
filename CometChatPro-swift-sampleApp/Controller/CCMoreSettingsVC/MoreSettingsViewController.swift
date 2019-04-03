@@ -137,6 +137,8 @@ class MoreSettingsViewController: UIViewController,UITableViewDelegate,UITableVi
         return 60
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        moreSettingsTableView.deselectRow(at: indexPath, animated: true)
         switch SettingsItems[indexPath.row]
         {
         case MoreSettingsCell.VIEW_PROFILE_CELL:
@@ -182,18 +184,23 @@ class MoreSettingsViewController: UIViewController,UITableViewDelegate,UITableVi
     }
     func viewBots()
     {
+        DispatchQueue.main.async(execute: { self.view.makeToast("This feature has not been added yet")})
     }
     func viewChatSettings()
     {
+        DispatchQueue.main.async(execute: { self.view.makeToast("This feature has not been added yet")})
     }
     func viewNotification()
     {
+         DispatchQueue.main.async(execute: { self.view.makeToast("This feature has not been added yet")})
     }
     func viewBlockedUser()
     {
+         DispatchQueue.main.async(execute: { self.view.makeToast("This feature has not been added yet")})
     }
     func viewGames()
     {
+         DispatchQueue.main.async(execute: { self.view.makeToast("This feature has not been added yet")})
     }
     func onLogout()
     {
@@ -210,7 +217,7 @@ class MoreSettingsViewController: UIViewController,UITableViewDelegate,UITableVi
                     let CustomLaunchViewController = storyBoard.instantiateViewController(withIdentifier: "customLaunchViewController") as! CustomLaunchViewController
                     self.present(CustomLaunchViewController, animated:true, completion:nil)
                 }, onError: { (error) in
-                    
+                     DispatchQueue.main.async(execute: { self.view.makeToast("Fail to logout at this moment.")})
                 })
                 
             case .cancel: break

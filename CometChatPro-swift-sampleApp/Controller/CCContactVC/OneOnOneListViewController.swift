@@ -143,6 +143,7 @@ class OneOnOneListViewController: UIViewController,UITableViewDelegate , UITable
         // NavigationBar Buttons Appearance
         // notifyButton.setImage(UIImage(named: "bell.png"), for: .normal)
         createButton.setImage(UIImage(named: "new.png"), for: .normal)
+        createButton.isHidden = true
         moreButton.setImage(UIImage(named: "more_vertical.png"), for: .normal)
         
         // notifyButton.tintColor = UIColor(hexFromString: UIAppearance.NAVIGATION_BAR_BUTTON_TINT_COLOR)
@@ -256,6 +257,7 @@ class OneOnOneListViewController: UIViewController,UITableViewDelegate , UITable
     
     //didSelectRowAt indexPath
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        oneOneOneTableView.deselectRow(at: indexPath, animated: true)
         let selectedCell:OneOnOneTableViewCell = tableView.cellForRow(at: indexPath) as! OneOnOneTableViewCell
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let oneOnOneChatViewController = storyboard.instantiateViewController(withIdentifier: "oneOnOneChatViewController") as! OneOnOneChatViewController
@@ -365,6 +367,7 @@ class OneOnOneListViewController: UIViewController,UITableViewDelegate , UITable
         CCMoreViewController.hidesBottomBarWhenPushed = true
         
     }
+    
     
     //createContact button Pressed
     @IBAction func createContactPressed(_ sender: Any) {
